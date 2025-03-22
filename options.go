@@ -4,14 +4,10 @@ type Option[T any] interface {
 	apply(*T)
 }
 
-type optionFunc[T any] func(*T)
+type Func[T any] func(*T)
 
-func (f optionFunc[T]) apply(options *T) {
+func (f Func[T]) apply(options *T) {
 	f(options)
-}
-
-func Func[T any](f func(*T)) Option[T] {
-	return optionFunc[T](f)
 }
 
 func New[T any](opts ...Option[T]) *T {
